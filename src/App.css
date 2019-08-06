@@ -4,14 +4,16 @@ pre {
 }
 
 .World {
-  border: 1px solid black;
+  /* border: 1px solid black; */
   position: absolute;
   width: 100%;
-  min-height: 10cm;
+  height: 100%;
 }
 
 .Body {
-  border: 1px solid red;
+  /* border: 1px solid red; */
+  border-radius: 50%;
+  background-color: black;
   position: absolute;
 
   font-size: 8pt;

@@ -11,9 +11,9 @@ class Body extends React.Component {
       height: this.props.body.size + "mm",
     }
     return <div className="Body" style={style}>
-      <span>{this.props.body.position.toString()}</span><br/>
+      {/* <span>{this.props.body.position.toString()}</span><br/>
       <span>{this.props.body.velocity.toString()}</span><br/>
-      <span>{this.props.body.mass}</span>
+      <span>{this.props.body.mass}</span> */}
     </div>
   }
 }
