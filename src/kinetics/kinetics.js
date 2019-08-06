@@ -114,4 +114,4 @@ class World {
   toString = () => this.bodies.join("\n");
 }
 
-module.exports = { Vector, Body, World };
+export { Vector, Body, World };
