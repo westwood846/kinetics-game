@@ -14,8 +14,11 @@ class Vector {
   }
 
   add = other => new Vector(this.x + other.x, this.y + other.y);
+  sub = other => new Vector(this.x - other.x, this.y - other.y);
 
   scale = scalar => new Vector(this.x * scalar, this.y * scalar);
+
+  dotProductWith = other => this.x * other.x + this.y * other.y;
 
   toString = () => `[${this.x.toPrecision(3)}, ${this.y.toPrecision(3)}]`;
 }
@@ -59,6 +62,20 @@ class World {
         if (bodyA !== bodyB) {
           bodyA.updateVelocityWith(bodyB, delta);
           bodyA.updatePosition(delta);
+
+          if (bodyA.position.distanceTo(bodyB.position) <= bodyA.size/2 + bodyB.size/2) {
+            console.log('collision!')
+            // Collision
+            console.log('bodyA vel before', bodyA.velocity.toString())
+            bodyA.velocity = bodyA.velocity.sub(
+              bodyA.position.sub(bodyB.position).scale(
+                2*bodyB.mass/(bodyA.mass + bodyB.mass)
+              ).scale(
+                bodyA.velocity.sub(bodyB.velocity).dotProductWith(bodyA.position.sub(bodyB.position)) / bodyA.position.distanceTo(bodyB.position)**2
+              )
+            );
+            console.log('bodyA vel after', bodyA.velocity.toString())
+          }
         }
       }
 
