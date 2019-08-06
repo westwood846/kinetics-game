@@ -12,8 +12,6 @@ pre {
 
 .Body {
   border: 1px solid red;
-  width: 32px;
-  height: 32px;
   position: absolute;
 
   font-size: 8pt;

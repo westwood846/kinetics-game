@@ -21,10 +21,11 @@ class Vector {
 }
 
 class Body {
-  constructor(position, velocity, mass) {
+  constructor(position, velocity, mass, size=0) {
     this.position = position;
     this.velocity = velocity;
     this.mass = mass;
+    this.size = size;
   }
 
   forceWith = other => G * this.mass * other.mass / this.position.distanceTo(other.position)**2; // [N] or [kg * m * s^-2]
