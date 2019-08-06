@@ -64,9 +64,6 @@ class World {
           bodyA.updatePosition(delta);
 
           if (bodyA.position.distanceTo(bodyB.position) <= bodyA.size/2 + bodyB.size/2) {
-            console.log('collision!')
-            // Collision
-            console.log('bodyA vel before', bodyA.velocity.toString())
             bodyA.velocity = bodyA.velocity.sub(
               bodyA.position.sub(bodyB.position).scale(
                 2*bodyB.mass/(bodyA.mass + bodyB.mass)
@@ -74,7 +71,6 @@ class World {
                 bodyA.velocity.sub(bodyB.velocity).dotProductWith(bodyA.position.sub(bodyB.position)) / bodyA.position.distanceTo(bodyB.position)**2
               )
             );
-            console.log('bodyA vel after', bodyA.velocity.toString())
           }
 
           // if (bodyA.position.distanceTo(bodyB.position) <= bodyA.size/2) {
