@@ -76,6 +76,16 @@ class World {
             );
             console.log('bodyA vel after', bodyA.velocity.toString())
           }
+
+          // if (bodyA.position.distanceTo(bodyB.position) <= bodyA.size/2) {
+          //   console.log('merge!')
+          //   let velocity = bodyA.velocity.scale(1/bodyA.mass).add(bodyB.velocity.scale(1/bodyB.mass));
+          //   let position = bodyA.position.add(bodyA.position.directionTo(bodyB.position).scale(bodyA.position.distanceTo(bodyB.position)).scale(.5));
+          //   let mass = bodyA.mass + bodyB.mass;
+          //   let size = Math.max(bodyA.size, bodyB.size);
+          //   this.add(new Body(position, velocity, mass, size));
+          //   this.bodies = this.bodies.filter(body => body !== bodyA && body !== bodyB);
+          // }
         }
       }
 
