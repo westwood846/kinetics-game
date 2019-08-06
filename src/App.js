@@ -5,10 +5,10 @@ import { World as KineticsWorld, Body as KineticsBody, Vector } from './kinetics
 class Body extends React.Component {
   render = () => {
     let style = {
-      top: this.props.body.position.y - this.props.body.size/2 + "mm", 
-      left: this.props.body.position.x - this.props.body.size/2 + "mm",
-      width: this.props.body.size + "mm",
-      height: this.props.body.size + "mm",
+      top: this.props.body.position.y - this.props.body.size/2 + "px", 
+      left: this.props.body.position.x - this.props.body.size/2 + "px",
+      width: this.props.body.size + "px",
+      height: this.props.body.size + "px",
     }
     return <div className="Body" style={style}>
       {/* <span>{this.props.body.position.toString()}</span><br/>
@@ -23,13 +23,21 @@ class World extends React.Component {
     super(props);
 
     let world = new KineticsWorld();
-    world.add(new KineticsBody(new Vector(40, 40), new Vector(0, 0),  6e15, 10));
-    world.add(new KineticsBody(new Vector(60, 40), new Vector(-40, -80),  1,    5));
-    world.add(new KineticsBody(new Vector(20, 80), new Vector(40, 0), 1,    5));
+    world.add(new KineticsBody(new Vector(160, 160), new Vector(0, 0),       6e17, 40));
+    world.add(new KineticsBody(new Vector(240, 160), new Vector(-160, -160), 2,    20));
+    world.add(new KineticsBody(new Vector(80, 320), new Vector(160, 0),     2,    20));
 
     this.state = {world};
 
     this.updateInterval = setInterval(this.update, 10);
+
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick = event => {
+    let world = {...this.state.world};
+    world.add(new KineticsBody(new Vector(event.clientX, event.clientY), new Vector(Math.random() * 300 - 150, Math.random() * 300 - 150), 2, 20));
+    this.setState({world});
   }
 
   update = () => {
@@ -39,10 +47,9 @@ class World extends React.Component {
   }
 
   render = () => {
-    console.log(this.state.world.bodies)
     return (
-      <div className="World">
-        {this.state.world.bodies.map(body => <Body body={body}/>)}
+      <div className="World" onClick={this.handleClick}>
+        {this.state.world.bodies.map((body, index) => <Body body={body} key={index}/>)}
       </div>
     )
   }
