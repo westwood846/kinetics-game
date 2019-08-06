@@ -20,9 +20,15 @@ class World extends React.Component {
     super(props);
 
     let world = new KineticsWorld(window.innerWidth, window.innerHeight);
-    world.add(new KineticsBody(new Vector(160, 160), new Vector(0, 0),       6e17, 40));
-    world.add(new KineticsBody(new Vector(240, 160), new Vector(-160, -160), 2,    20));
-    world.add(new KineticsBody(new Vector(80, 320), new Vector(160, 0),     2,    20));
+    world.add(new KineticsBody(new Vector(window.innerWidth/2-20, window.innerHeight/2 - 20), new Vector(0, 0), 6e17, 40));
+    for (let i = 0; i < 5; i++) {
+      world.add(new KineticsBody(
+        new Vector(Math.random() * (window.innerWidth-10), Math.random() * (window.innerHeight-10)),
+        new Vector(Math.random() * 200 - 100, Math.random() * 200 - 100),
+        2,
+        20
+      ));
+    }
 
     this.state = {world, mouseDown: null};
 
