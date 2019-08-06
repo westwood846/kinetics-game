@@ -52,9 +52,10 @@ class World extends React.Component {
   }
 
   update = () => {
-    let updatedWorld = {...this.state.world};
-    updatedWorld.update(1);
-    this.setState({world: updatedWorld});
+    let world = new KineticsWorld(window.innerWidth, window.innerHeight);
+    world.bodies = this.state.world.bodies.slice();
+    world.update(1);
+    this.setState({world});
   }
 
   render = () => {
