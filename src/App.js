@@ -49,10 +49,13 @@ class World extends React.Component {
     let state = {...this.state};
     let mouseUp = new Vector(event.clientX, event.clientY);
     let distance = mouseUp.distanceTo(state.mouseDown);
-    if (distance > 2) {
-      let newBody = new KineticsBody(mouseUp, mouseUp.directionTo(state.mouseDown).scale(distance), 2, 20);
-      state.world.add(newBody);
+    let newBody = null;
+    if (distance > 0) {
+      newBody = new KineticsBody(mouseUp, mouseUp.directionTo(state.mouseDown).scale(distance), 2, 20);
+    } else {
+      newBody = new KineticsBody(mouseUp, new Vector(0, 0), 2, 20);
     }
+    state.world.add(newBody);
     state.mouseDown = null;
     this.setState({...state});
   }
