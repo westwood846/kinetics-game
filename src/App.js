@@ -24,7 +24,7 @@ class World extends React.Component {
     for (let i = 0; i < 5; i++) {
       world.add(new KineticsBody(
         new Vector(Math.random() * (window.innerWidth-10), Math.random() * (window.innerHeight-10)),
-        new Vector(Math.random() * 200 - 100, Math.random() * 200 - 100),
+        new Vector((Math.random() * 200 + 200) * (Math.random() > .5 ? -1 : 1), (Math.random() * 200 + 200) * (Math.random() > .5 ? -1 : 1)),
         2,
         20
       ));
