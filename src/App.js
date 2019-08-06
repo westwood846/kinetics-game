@@ -19,7 +19,7 @@ class World extends React.Component {
   constructor(props) {
     super(props);
 
-    let world = new KineticsWorld();
+    let world = new KineticsWorld(window.innerWidth, window.innerHeight);
     world.add(new KineticsBody(new Vector(160, 160), new Vector(0, 0),       6e17, 40));
     world.add(new KineticsBody(new Vector(240, 160), new Vector(-160, -160), 2,    20));
     world.add(new KineticsBody(new Vector(80, 320), new Vector(160, 0),     2,    20));

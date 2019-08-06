@@ -45,8 +45,10 @@ class Body {
 }
 
 class World {
-  constructor() {
+  constructor(width, height) {
     this.bodies = [];
+    this.width = width;
+    this.height = height;
   }
 
   add = body => this.bodies.push(body);
@@ -58,6 +60,30 @@ class World {
           bodyA.updateVelocityWith(bodyB, delta);
           bodyA.updatePosition(delta);
         }
+      }
+
+      if (this.width && this.height) {
+        if (bodyA.position.x - bodyA.size/2 <= 0) { 
+          bodyA.velocity.x = bodyA.velocity.x * -1;
+          bodyA.position.x = bodyA.position.x - bodyA.position.x + bodyA.size/2 + 1;
+          bodyA.velocity = bodyA.velocity.scale(.8);
+        }
+        if (bodyA.position.y - bodyA.size/2 <= 0) {
+          bodyA.velocity.y = bodyA.velocity.y * -1;
+          bodyA.position.y = bodyA.position.y - bodyA.position.y + bodyA.size/2 + 1;
+          bodyA.velocity = bodyA.velocity.scale(.8);
+        }
+        if (bodyA.position.x + bodyA.size/2 >= this.width) {
+          bodyA.velocity.x = bodyA.velocity.x * -1;
+          bodyA.position.x = bodyA.position.x + this.width - bodyA.position.x - bodyA.size/2 - 1;
+          bodyA.velocity = bodyA.velocity.scale(.8);
+        }
+        if (bodyA.position.y + bodyA.size/2 >= this.height) {
+          bodyA.velocity.y = bodyA.velocity.y * -1;
+          bodyA.position.y = bodyA.position.y + this.height - bodyA.position.y - bodyA.size/2 - 1;
+          bodyA.velocity = bodyA.velocity.scale(.8);
+        }
+        // if (bodyA.position.y  bodyA.size/2 <= 0) { bodyA.velocity.y = bodyA.velocity.y * -1; bodyA.velocity = bodyA.velocity.scale(.5); }
       }
     }
   }
