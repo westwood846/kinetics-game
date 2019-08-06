@@ -6,11 +6,11 @@ class Vector {
     this.y = y;
   }
 
-  distanceTo = other => Math.abs(Math.sqrt((other.x - this.x)**2 + (other.y - this.y)**2));
+  distanceTo = other => Math.sqrt(Math.abs((other.x - this.x)**2 + (other.y - this.y)**2));
 
   directionTo = other => {
     let distanceToOther = this.distanceTo(other);
-    return new Vector((other.x - this.x)/distanceToOther, (other.y - this.y)/distanceToOther);
+    return distanceToOther > 0 ? new Vector((other.x - this.x)/distanceToOther, (other.y - this.y)/distanceToOther) : new Vector(0, 0);
   }
 
   add = other => new Vector(this.x + other.x, this.y + other.y);
@@ -30,7 +30,7 @@ class Body {
 
   forceWith = other => G * this.mass * other.mass / this.position.distanceTo(other.position)**2; // [N] or [kg * m * s^-2]
 
-  accelerationTowards = other => this.forceWith(other)/this.mass; // [m * s^-2]
+  accelerationTowards = other => this.mass > 0 && this.position.distanceTo(other.position) > 0 ? this.forceWith(other)/this.mass : 0; // [m * s^-2]
 
   updateVelocityWith = (other, delta) => {
     let directionToOther = this.position.directionTo(other.position);

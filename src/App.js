@@ -11,9 +11,6 @@ class Body extends React.Component {
       height: this.props.body.size + "px",
     }
     return <div className="Body" style={style}>
-      {/* <span>{this.props.body.position.toString()}</span><br/>
-      <span>{this.props.body.velocity.toString()}</span><br/>
-      <span>{this.props.body.mass}</span> */}
     </div>
   }
 }
@@ -27,17 +24,31 @@ class World extends React.Component {
     world.add(new KineticsBody(new Vector(240, 160), new Vector(-160, -160), 2,    20));
     world.add(new KineticsBody(new Vector(80, 320), new Vector(160, 0),     2,    20));
 
-    this.state = {world};
+    this.state = {world, mouseDown: null};
 
     this.updateInterval = setInterval(this.update, 10);
 
-    this.handleClick = this.handleClick.bind(this);
+    this.handleMouseDown = this.handleMouseDown.bind(this);
+    this.handleMouseUp = this.handleMouseUp.bind(this);
   }
 
-  handleClick = event => {
+  handleMouseDown = event => {
     let world = {...this.state.world};
-    world.add(new KineticsBody(new Vector(event.clientX, event.clientY), new Vector(Math.random() * 300 - 150, Math.random() * 300 - 150), 2, 20));
-    this.setState({world});
+    let mouseDown = new Vector(event.clientX, event.clientY);
+    this.setState({world, mouseDown});
+  }
+  
+  handleMouseUp = event => {
+    if (!this.state.mouseDown) return;
+    let state = {...this.state};
+    let mouseUp = new Vector(event.clientX, event.clientY);
+    let distance = mouseUp.distanceTo(state.mouseDown);
+    if (distance > 2) {
+      let newBody = new KineticsBody(mouseUp, mouseUp.directionTo(state.mouseDown).scale(distance), 2, 20);
+      state.world.add(newBody);
+    }
+    state.mouseDown = null;
+    this.setState({...state});
   }
 
   update = () => {
@@ -48,7 +59,7 @@ class World extends React.Component {
 
   render = () => {
     return (
-      <div className="World" onClick={this.handleClick}>
+      <div className="World" onMouseDown={this.handleMouseDown} onMouseUp={this.handleMouseUp}>
         {this.state.world.bodies.map((body, index) => <Body body={body} key={index}/>)}
       </div>
     )
