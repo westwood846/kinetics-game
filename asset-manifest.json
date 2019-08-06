@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/kinetics-game/static/css/main.ce01f0ae.chunk.css",
+    "main.js": "/kinetics-game/static/js/main.e3003c78.chunk.js",
+    "main.js.map": "/kinetics-game/static/js/main.e3003c78.chunk.js.map",
+    "runtime~main.js": "/kinetics-game/static/js/runtime~main.577286e1.js",
+    "runtime~main.js.map": "/kinetics-game/static/js/runtime~main.577286e1.js.map",
+    "static/js/2.ef3dd441.chunk.js": "/kinetics-game/static/js/2.ef3dd441.chunk.js",
+    "static/js/2.ef3dd441.chunk.js.map": "/kinetics-game/static/js/2.ef3dd441.chunk.js.map",
+    "index.html": "/kinetics-game/index.html",
+    "precache-manifest.d693bb8d9df7636bfd50bdbaaedf6f54.js": "/kinetics-game/precache-manifest.d693bb8d9df7636bfd50bdbaaedf6f54.js",
+    "service-worker.js": "/kinetics-game/service-worker.js",
+    "static/css/main.ce01f0ae.chunk.css.map": "/kinetics-game/static/css/main.ce01f0ae.chunk.css.map"
+  }
+}
