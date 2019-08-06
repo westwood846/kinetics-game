@@ -17,7 +17,7 @@ class Vector {
 
   scale = scalar => new Vector(this.x * scalar, this.y * scalar);
 
-  toString = () => `[${this.x}, ${this.y}]`;
+  toString = () => `[${this.x.toPrecision(3)}, ${this.y.toPrecision(3)}]`;
 }
 
 class Body {
@@ -40,7 +40,7 @@ class Body {
 
   updatePosition = delta => this.position = this.position.add(this.velocity.scale(delta / 1000));
 
-  toString = () => `pos: ${this.position}, vel: ${this.velocity}, m: ${this.mass}`;
+  toString = () => `pos: ${this.position}, vel: ${this.velocity}, m: ${this.mass.toPrecision(3)}`;
 }
 
 class World {
